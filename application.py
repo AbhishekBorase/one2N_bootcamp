@@ -1,0 +1,48 @@
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
+import datetime
+from sqlalchemy import UniqueConstraint
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+db = SQLAlchemy(app)
+
+class Student(db.Model):
+    __table_args__ = (UniqueConstraint('name', 'date_of_birth', name='uix_name_date'),)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    date_of_birth = db.Column(db.Date)
+
+    def __repr__(self):
+        return f'{self.name} - {self.date_of_birth}'
+
+@app.route('/')
+def index():
+    return 'Hello, World!'
+
+@app.route('/students')
+def student():
+    students = Student.query.all()
+    output = []
+    for student in students:
+        student_data = {'name': student.name, 'date_of_birth': student.date_of_birth.strftime("%Y-%m-%d")}
+        output.append(student_data)
+    return {"students" : output}
+
+@app.route('/students/<int:id>')
+def student_by_id(id):
+    student = Student.query.get_or_404(id)
+    return {"name": student.name , "date_of_birth": student.date_of_birth.strftime("%Y-%m-%d")}
+
+@app.route('/students', methods=['POST'])
+def add_student():
+    student = Student(name=request.json['name'], date_of_birth=datetime.datetime.strptime(request.json['date_of_birth'], "%Y-%m-%d").date())
+    db.session.add(student)
+    db.session.commit()
+    return {"id": student.id}
+
+@app.route('/students/<int:id>', methods=['DELETE'])
+def delete_student(id):
+    student = Student.query.get_or_404(id)
+    db.session.delete(student)
+    db.session.commit()
+    return {"message": "Student deleted"}
