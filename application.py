@@ -1,7 +1,8 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-from sqlalchemy import UniqueConstraint
+import sqlite3
+from sqlalchemy import UniqueConstraint, exc
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
 db = SQLAlchemy(app)
@@ -35,9 +36,13 @@ def student_by_id(id):
 
 @app.route('/students', methods=['POST'])
 def add_student():
-    student = Student(name=request.json['name'], date_of_birth=datetime.datetime.strptime(request.json['date_of_birth'], "%Y-%m-%d").date())
-    db.session.add(student)
-    db.session.commit()
+    try:
+        student = Student(name=request.json['name'], date_of_birth=datetime.datetime.strptime(request.json['date_of_birth'], "%Y-%m-%d").date())
+        db.session.add(student)
+        db.session.commit()
+    except exc.IntegrityError:
+        db.session.rollback()
+        return {"error": "Student already exists"}
     return {"id": student.id}
 
 @app.route('/students/<int:id>', methods=['DELETE'])
