@@ -77,7 +77,27 @@ The `Student` model enforces a unique constraint on the combination of `name` an
 
 **Migrations (recommended for schema changes)**
 
-For production or evolving schemas use Flask-Migrate (Alembic) instead of deleting `students.db`.
+For production or evolving schemas Flask-Migrate (Alembic) is used instead of deleting `students.db`.
+
+To upgrade the schema run below comands on shell.
+```bash
+make db_upgrade
+```
+This will run below commands for you. 
+```bash
+flask db migrate
+flask db upgrade
+```
+
+To downgrade the schema run below comands on shell.
+```bash
+make db_downgrade
+```
+This will run below commands for you. 
+```bash
+flask db migrate
+flask db downgrade
+```
 
 **Relevant files**
 

@@ -1,0 +1,118 @@
+{
+  "info": {
+    "_postman_id": "0423e89d-5e67-483e-9efa-07ad978667fd",
+    "name": "One2N_bootamp",
+    "description": "API to perform the following operations.  \n\\- Add a new student.  \n\\- Get all students.  \n\\- Get a student with an ID.  \n\\- Update existing student information.  \n\\- Delete a student record.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34365913",
+    "_collection_link": "https://go.postman.co/collection/34365913-0423e89d-5e67-483e-9efa-07ad978667fd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get_Students",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}",
+          "host": [
+            "{{base_url}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get_student_with_id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/3",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add_Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Sanket\",\n    \"date_of_birth\": \"2001-04-30\",\n    \"age\": \"24\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}",
+          "host": [
+            "{{base_url}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/4",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update_Student",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"age\": \"25\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/4",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "4"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
