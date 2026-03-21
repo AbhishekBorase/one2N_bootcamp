@@ -4,11 +4,24 @@
 
 Simple Flask app using Flask-SQLAlchemy to store students in an SQLite database.
 
+This app creates an API to perform the following operations.
+- Add a new student.
+- Get all students.
+- Get a student with an ID.
+- Update existing student information.
+- Delete a student record.
+
 **Quick Start**
 
-- **Requirements:** Python 3.x, pip
-- Install deps:
+- **Requirements:** Python 3.x, pip, make
 
+- Install deps: (using makefile)
+
+```bash
+make venv
+```
+
+This will execute bellow comands for you in bash.
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -17,7 +30,13 @@ pip install -r requirements.txt
 
 **Run the app**
 
-Use the Flask CLI (preferred):
+Use the makefile (preferred):
+
+```bash
+make run
+```
+
+This will automaticaly run the following comands in bash.
 
 ```bash
 export FLASK_APP=application.py
