@@ -21,7 +21,11 @@ class Student(db.Model):
 
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    return 'Hello, Welcome to bootcamp!'
+
+@app.route('/healthcheck')
+def health():
+    return 'Health check passed!', 200
 
 @app.route('/students')
 def student():
@@ -37,7 +41,7 @@ def student_by_id(id):
     student = Student.query.get_or_404(id)
     return {"name": student.name , "date_of_birth": student.date_of_birth.strftime("%Y-%m-%d"), "age": student.age}
 
-@app.route('/students', methods=['POST'])
+@app.route('/addstudent', methods=['POST'])
 def add_student():
     try:
         student = Student(name=request.json['name'], date_of_birth=datetime.datetime.strptime(request.json['date_of_birth'], "%Y-%m-%d").date(), age=request.json['age'])
@@ -48,14 +52,14 @@ def add_student():
         return {"error": "Student already exists"}
     return {"id": student.id}
 
-@app.route('/students/<int:id>', methods=['DELETE'])
+@app.route('/deletestudent/<int:id>', methods=['DELETE'])
 def delete_student(id):
     student = Student.query.get_or_404(id)
     db.session.delete(student)
     db.session.commit()
     return {"message": "Student deleted"}
 
-@app.route('/students/<int:id>', methods=['PATCH'])
+@app.route('/updatestudent/<int:id>', methods=['PATCH'])
 def update_student(id):
     student = Student.query.get_or_404(id)
     student.name = request.json.get('name', student.name)

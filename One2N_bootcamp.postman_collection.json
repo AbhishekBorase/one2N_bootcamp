@@ -1,11 +1,11 @@
 {
   "info": {
-    "_postman_id": "0423e89d-5e67-483e-9efa-07ad978667fd",
-    "name": "One2N_bootamp",
+    "_postman_id": "06e8bb9b-596e-48e3-bf0b-4d3a2c481988",
+    "name": "One2N_bootcamp",
     "description": "API to perform the following operations.  \n\\- Add a new student.  \n\\- Get all students.  \n\\- Get a student with an ID.  \n\\- Update existing student information.  \n\\- Delete a student record.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "34365913",
-    "_collection_link": "https://go.postman.co/collection/34365913-0423e89d-5e67-483e-9efa-07ad978667fd?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/34365913-06e8bb9b-596e-48e3-bf0b-4d3a2c481988?source=collection_link"
   },
   "item": [
     {
@@ -14,9 +14,16 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}",
+          "raw": "127.0.0.1:5000/students",
           "host": [
-            "{{base_url}}"
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "students"
           ]
         }
       },
@@ -28,11 +35,16 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/3",
+          "raw": "127.0.0.1:5000/students/3",
           "host": [
-            "{{base_url}}"
+            "127",
+            "0",
+            "0",
+            "1"
           ],
+          "port": "5000",
           "path": [
+            "students",
             "3"
           ]
         }
@@ -54,9 +66,16 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}",
+          "raw": "127.0.0.1:5000/addstudent",
           "host": [
-            "{{base_url}}"
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "addstudent"
           ]
         }
       },
@@ -77,11 +96,16 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/4",
+          "raw": "127.0.0.1:5000/deletestudent/4",
           "host": [
-            "{{base_url}}"
+            "127",
+            "0",
+            "0",
+            "1"
           ],
+          "port": "5000",
           "path": [
+            "deletestudent",
             "4"
           ]
         }
@@ -103,12 +127,38 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/4",
+          "raw": "127.0.0.1:5000/updatestudent/4",
           "host": [
-            "{{base_url}}"
+            "127",
+            "0",
+            "0",
+            "1"
           ],
+          "port": "5000",
           "path": [
+            "updatestudent",
             "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Healthcheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "127.0.0.1:5000/healthcheck",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "healthcheck"
           ]
         }
       },
