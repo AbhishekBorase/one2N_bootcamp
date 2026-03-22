@@ -9,12 +9,12 @@
   },
   "item": [
     {
-      "name": "Get_Students",
+      "name": "Get_Students_v1",
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "127.0.0.1:5000/students",
+          "raw": "127.0.0.1:5000/api/v1/students",
           "host": [
             "127",
             "0",
@@ -23,6 +23,8 @@
           ],
           "port": "5000",
           "path": [
+            "api",
+            "v1",
             "students"
           ]
         }
@@ -30,12 +32,12 @@
       "response": []
     },
     {
-      "name": "Get_student_with_id",
+      "name": "Get_Students_v2",
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "127.0.0.1:5000/students/3",
+          "raw": "127.0.0.1:5000/api/v2/students",
           "host": [
             "127",
             "0",
@@ -44,6 +46,31 @@
           ],
           "port": "5000",
           "path": [
+            "api",
+            "v2",
+            "students"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get_student_with_id_v1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "127.0.0.1:5000/api/v1/students/3",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
             "students",
             "3"
           ]
@@ -52,7 +79,31 @@
       "response": []
     },
     {
-      "name": "Add_Student",
+      "name": "Get_student_with_id_v2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "127.0.0.1:5000/api/v2/students/3",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v2",
+            "students",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add_Student_v1",
       "request": {
         "method": "POST",
         "header": [],
@@ -66,7 +117,7 @@
           }
         },
         "url": {
-          "raw": "127.0.0.1:5000/addstudent",
+          "raw": "127.0.0.1:5000/api/v1/addstudent",
           "host": [
             "127",
             "0",
@@ -75,6 +126,40 @@
           ],
           "port": "5000",
           "path": [
+            "api",
+            "v1",
+            "addstudent"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add_Student_v2",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Sanket\",\n    \"dob\": \"2001-04-30\",\n    \"age\": \"24\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "127.0.0.1:5000/api/v2/addstudent",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v2",
             "addstudent"
           ]
         }

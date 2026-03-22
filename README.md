@@ -46,6 +46,35 @@ flask run
 
 The app exposes a root route and a `/students` placeholder route. See [application.py](application.py).
 
+
+**Hit API Request**
+
+Import "One2N_bootcamp.postman_collection.json" into postman collections. 
+Run each API one by one.
+
+There are two versions of API (v1,v2)
+
+**v1**
+usage : {{base_url}}/api/v1/students
+
+Returns : 4 Cols Id, Name, date_of_earth, age
+
+**v2**
+usage : {{base_url}}/api/v2/students
+
+Returns : 5 Cols Id, Name, dob, age, is_adult
+
+Note That : In v2 date_of_birth is changed to dob while returning. Also a new information "is_adult" is eturned in extra.
+
+**Common Endpoints**
+There are some common endpoints for healthcheck, updatestudent and deletestudent which are defined in common.
+
+Usage: 
+- healtcheck : {{base_url}}/healthcheck
+- updatestudent : {{base_url}}/updatestudent/{id}
+- deletestudent : {{base_url}}/deletestudent/{id}
+
+
 **Database**
 
 - SQLite file: `students.db` (created in project root).

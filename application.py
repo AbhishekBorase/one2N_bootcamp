@@ -27,30 +27,6 @@ def index():
 def health():
     return 'Health check passed!', 200
 
-@app.route('/students')
-def student():
-    students = Student.query.all()
-    output = []
-    for student in students:
-        student_data = {'name': student.name, 'date_of_birth': student.date_of_birth.strftime("%Y-%m-%d"), 'age': student.age}
-        output.append(student_data)
-    return {"students" : output}
-
-@app.route('/students/<int:id>')
-def student_by_id(id):
-    student = Student.query.get_or_404(id)
-    return {"name": student.name , "date_of_birth": student.date_of_birth.strftime("%Y-%m-%d"), "age": student.age}
-
-@app.route('/addstudent', methods=['POST'])
-def add_student():
-    try:
-        student = Student(name=request.json['name'], date_of_birth=datetime.datetime.strptime(request.json['date_of_birth'], "%Y-%m-%d").date(), age=request.json['age'])
-        db.session.add(student)
-        db.session.commit()
-    except exc.IntegrityError:
-        db.session.rollback()
-        return {"error": "Student already exists"}
-    return {"id": student.id}
 
 @app.route('/deletestudent/<int:id>', methods=['DELETE'])
 def delete_student(id):
@@ -67,3 +43,12 @@ def update_student(id):
     student.age = request.json.get('age', student.age)
     db.session.commit()
     return {"message": "Student updated"}
+
+
+try:
+    from api.v1 import bp as api_v1_bp
+    from api.v2 import bp as api_v2_bp
+    app.register_blueprint(api_v1_bp, url_prefix='/api/v1')
+    app.register_blueprint(api_v2_bp, url_prefix='/api/v2')
+except Exception as e:
+    print(f"Error occurred while registering blueprints: {e}")
