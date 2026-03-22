@@ -55,11 +55,13 @@ Run each API one by one.
 There are two versions of API (v1,v2)
 
 **v1**
+
 usage : {{base_url}}/api/v1/students
 
 Returns : 4 Cols Id, Name, date_of_earth, age
 
 **v2**
+
 usage : {{base_url}}/api/v2/students
 
 Returns : 5 Cols Id, Name, dob, age, is_adult
@@ -67,6 +69,7 @@ Returns : 5 Cols Id, Name, dob, age, is_adult
 Note That : In v2 date_of_birth is changed to dob while returning. Also a new information "is_adult" is eturned in extra.
 
 **Common Endpoints**
+
 There are some common endpoints for healthcheck, updatestudent and deletestudent which are defined in common.
 
 Usage: 
