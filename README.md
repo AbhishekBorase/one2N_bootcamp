@@ -21,7 +21,7 @@ This app creates an API to perform the following operations.
 make venv
 ```
 
-This will execute bellow comands for you in bash.
+This goal will execute bellow comands for you in bash.
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -36,7 +36,7 @@ Use the makefile (preferred):
 make run
 ```
 
-This will automaticaly run the following comands in bash.
+This goal will automaticaly run the following comands in bash.
 
 ```bash
 export FLASK_APP=application.py
@@ -76,6 +76,20 @@ Usage:
 - healtcheck : {{base_url}}/healthcheck
 - updatestudent : {{base_url}}/updatestudent/{id}
 - deletestudent : {{base_url}}/deletestudent/{id}
+
+**Run Tests**
+
+Using Make test goal.
+```bash
+make test
+```
+
+The goal will run below commands in terminal.
+```bash
+export FLASK_APP=application.py
+export FLASK_ENV=development  # optional
+pytest -v
+```
 
 
 **Database**
