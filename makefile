@@ -1,7 +1,7 @@
 APP = application.py
 ENV = development
 
-.PHONY: venv db_upgrade db_downgrade run
+.PHONY: venv db_upgrade db_downgrade test run
 
 venv:
 	@echo "Creating virtual environment"
@@ -17,6 +17,11 @@ db_downgrade:
 	source .venv/bin/activate \
 	&& export FLASK_APP=$(APP) \
 	&& export FLASK_ENV=$(ENV) && flask db migrate && flask db downgrade
+
+test:
+	source .venv/bin/activate \
+	&& export FLASK_APP=$(APP) \
+	&& export FLASK_ENV=$(ENV) && pytest -v
 
 run:
 	source .venv/bin/activate \

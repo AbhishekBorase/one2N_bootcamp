@@ -30,19 +30,27 @@ def health():
 
 @app.route('/deletestudent/<int:id>', methods=['DELETE'])
 def delete_student(id):
-    student = Student.query.get_or_404(id)
-    db.session.delete(student)
-    db.session.commit()
-    return {"message": "Student deleted"}
+    try:
+        student = Student.query.get_or_404(id)
+        db.session.delete(student)
+        db.session.commit()
+        return {"message": "Student deleted"}, 204
+    except Exception as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
 
 @app.route('/updatestudent/<int:id>', methods=['PATCH'])
 def update_student(id):
-    student = Student.query.get_or_404(id)
-    student.name = request.json.get('name', student.name)
-    student.date_of_birth = request.json.get('date_of_birth', student.date_of_birth)
-    student.age = request.json.get('age', student.age)
-    db.session.commit()
-    return {"message": "Student updated"}
+    try:
+        student = Student.query.get_or_404(id)
+        student.name = request.json.get('name', student.name)
+        student.date_of_birth = request.json.get('date_of_birth', student.date_of_birth)
+        student.age = request.json.get('age', student.age)
+        db.session.commit()
+        return {"message": "Student updated"}, 204
+    except Exception as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
 
 
 try:
