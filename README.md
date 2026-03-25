@@ -23,8 +23,8 @@ make venv
 
 This goal will execute bellow comands for you in bash.
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -95,7 +95,7 @@ pytest -v
 **Database**
 
 - SQLite file: `students.db` (created in project root).
-- Create tables manually:
+- Create tables manually: (used only for the first to create student table)
 
 ```bash
 flask shell
@@ -109,8 +109,11 @@ db.session.commit()
 **Add a student**
 
 There is a helper script: [add_student.py](add_student.py)
+This Script is used only for the first time when project is ran, to create a student table 
+and add students in the DB.
 
 ```bash
+source .venv/bin/activate
 python add_student.py "Alice" 2000-01-01
 ```
 

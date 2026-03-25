@@ -8,10 +8,6 @@ def client():
         db.create_all()
     with app.test_client() as client:
         yield client
-    # teardown
-    with app.app_context():
-        db.session.remove()
-        db.drop_all()
 
 def test_get_students(client):
     resp = client.get('/api/v1/students')
@@ -34,7 +30,7 @@ def test_create_student(client):
 
     # Cleanup
     del_resp = client.delete(f'/deletestudent/{student_id}')
-    assert del_resp.status_code == 204
+    assert del_resp.status_code == 200
 
 def test_create_duplicate_student(client):
     new_student = {
@@ -55,4 +51,4 @@ def test_create_duplicate_student(client):
 
     # Cleanup
     del_resp = client.delete(f'/deletestudent/{sid}')
-    assert del_resp.status_code == 204
+    assert del_resp.status_code == 200

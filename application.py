@@ -34,7 +34,7 @@ def delete_student(id):
         student = Student.query.get_or_404(id)
         db.session.delete(student)
         db.session.commit()
-        return {"message": "Student deleted"}, 204
+        return {"message": "Student deleted"}, 200
     except Exception as e:
         db.session.rollback()
         return {"error": str(e)}, 400
@@ -47,7 +47,7 @@ def update_student(id):
         student.date_of_birth = request.json.get('date_of_birth', student.date_of_birth)
         student.age = request.json.get('age', student.age)
         db.session.commit()
-        return {"message": "Student updated"}, 204
+        return {"message": "Student updated"}, 200
     except Exception as e:
         db.session.rollback()
         return {"error": str(e)}, 400
