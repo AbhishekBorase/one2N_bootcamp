@@ -8,27 +8,33 @@ bp = Blueprint('api_v1', __name__)
 
 @bp.route('/students', methods=['GET'])
 def get_students():
-    students = Student.query.all()
-    output = []
-    for s in students:
-        output.append({
-            'id': s.id,
-            'name': s.name,
-            'date_of_birth': s.date_of_birth.strftime("%Y-%m-%d"),
-            'age': s.age,
-        })
-    return {'students': output}
+    try:
+        students = Student.query.all()
+        output = []
+        for s in students:
+            output.append({
+                'id': s.id,
+                'name': s.name,
+                'date_of_birth': s.date_of_birth.strftime("%Y-%m-%d"),
+                'age': s.age,
+            })
+        return {'students': output}, 200
+    except Exception as e:
+        return {'error': str(e)}, 500
 
 
 @bp.route('/students/<int:id>', methods=['GET'])
 def get_student(id):
-    s = Student.query.get_or_404(id)
+    try:
+        s = Student.query.get_or_404(id)
+    except Exception as e:
+        return {'error': str(e)}, 500
     return {
         'id': s.id,
         'name': s.name,
         'date_of_birth': s.date_of_birth.strftime("%Y-%m-%d"),
         'age': s.age,
-    }
+    }, 200
 
 
 @bp.route('/addstudent', methods=['POST'])
@@ -45,5 +51,8 @@ def create_student():
     except exc.IntegrityError:
         db.session.rollback()
         return {'error': 'Student already exists'}, 400
+    except Exception as e:
+        db.session.rollback()
+        return {'error': str(e)}, 500
     return {'id': s.id}, 201
 

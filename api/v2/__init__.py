@@ -15,22 +15,28 @@ def _is_adult(age):
 
 @bp.route('/students', methods=['GET'])
 def get_students_v2():
-    students = Student.query.all()
-    output = []
-    for s in students:
-        output.append({
-            'id': s.id,
-            'name': s.name,
-            'dob': s.date_of_birth.strftime("%Y-%m-%d"),
-            'age': s.age,
-            'is_adult': _is_adult(s.age),
-        })
-    return {'students': output, 'version': 'v2'}
+    try:
+        students = Student.query.all()
+        output = []
+        for s in students:
+            output.append({
+                'id': s.id,
+                'name': s.name,
+                'dob': s.date_of_birth.strftime("%Y-%m-%d"),
+                'age': s.age,
+                'is_adult': _is_adult(s.age),
+            })
+        return {'students': output, 'version': 'v2'}, 200
+    except Exception as e:
+        return {'error': str(e)}, 500
 
 
 @bp.route('/students/<int:id>', methods=['GET'])
 def get_student_v2(id):
-    s = Student.query.get_or_404(id)
+    try:
+        s = Student.query.get_or_404(id)
+    except Exception as e:
+        return {'error': str(e)}, 500
     return {
         'id': s.id,
         'name': s.name,
@@ -38,7 +44,7 @@ def get_student_v2(id):
         'age': s.age,
         'is_adult': _is_adult(s.age),
         'version': 'v2',
-    }
+    }, 200
 
 
 @bp.route('/addstudent', methods=['POST'])
@@ -55,4 +61,7 @@ def create_student_v2():
     except exc.IntegrityError:
         db.session.rollback()
         return {'error': 'Student already exists'}, 400
+    except Exception as e:
+        db.session.rollback()
+        return {'error': str(e)}, 500
     return {'id': s.id, 'version': 'v2'}, 201
