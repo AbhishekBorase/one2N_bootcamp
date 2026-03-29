@@ -1,11 +1,11 @@
 {
   "info": {
-    "_postman_id": "06e8bb9b-596e-48e3-bf0b-4d3a2c481988",
+    "_postman_id": "65683236-8b38-41a3-b50f-044369eceec2",
     "name": "One2N_bootcamp",
     "description": "API to perform the following operations.  \n\\- Add a new student.  \n\\- Get all students.  \n\\- Get a student with an ID.  \n\\- Update existing student information.  \n\\- Delete a student record.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "34365913",
-    "_collection_link": "https://go.postman.co/collection/34365913-06e8bb9b-596e-48e3-bf0b-4d3a2c481988?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/34365913-65683236-8b38-41a3-b50f-044369eceec2?source=collection_link"
   },
   "item": [
     {
@@ -60,7 +60,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "127.0.0.1:5000/api/v1/students/3",
+          "raw": "127.0.0.1:5000/api/v1/students/1",
           "host": [
             "127",
             "0",
@@ -72,7 +72,7 @@
             "api",
             "v1",
             "students",
-            "3"
+            "1"
           ]
         }
       },
@@ -84,7 +84,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "127.0.0.1:5000/api/v2/students/3",
+          "raw": "127.0.0.1:5000/api/v2/students/2",
           "host": [
             "127",
             "0",
@@ -96,7 +96,7 @@
             "api",
             "v2",
             "students",
-            "3"
+            "2"
           ]
         }
       },
@@ -109,7 +109,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"Sanket\",\n    \"date_of_birth\": \"2001-04-30\",\n    \"age\": \"24\"\n}",
+          "raw": "{\n    \"name\": \"Sanket\",\n    \"date_of_birth\": \"2001-04-07\",\n    \"age\": \"24\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -141,7 +141,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"Sanket\",\n    \"dob\": \"2001-04-30\",\n    \"age\": \"24\"\n}",
+          "raw": "{\n    \"name\": \"Abhishek\",\n    \"dob\": \"2001-04-30\",\n    \"age\": \"24\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -181,7 +181,7 @@
           }
         },
         "url": {
-          "raw": "127.0.0.1:5000/deletestudent/4",
+          "raw": "127.0.0.1:5000/deletestudent/2",
           "host": [
             "127",
             "0",
@@ -191,7 +191,7 @@
           "port": "5000",
           "path": [
             "deletestudent",
-            "4"
+            "2"
           ]
         }
       },
@@ -212,7 +212,7 @@
           }
         },
         "url": {
-          "raw": "127.0.0.1:5000/updatestudent/4",
+          "raw": "127.0.0.1:5000/updatestudent/2",
           "host": [
             "127",
             "0",
@@ -222,7 +222,7 @@
           "port": "5000",
           "path": [
             "updatestudent",
-            "4"
+            "2"
           ]
         }
       },
