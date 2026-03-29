@@ -2,6 +2,7 @@ name: api-application
 services:
   api:
     build: .
+    image: api-application:v1.0.0
     container_name: api-application
     ports:
       - "127.0.0.1:5000:5000"
