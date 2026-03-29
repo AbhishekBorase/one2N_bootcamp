@@ -13,9 +13,9 @@ This app creates an API to perform the following operations.
 
 **Quick Start**
 
-- **Requirements:** Python 3.x, pip, make
+- **Requirements:** Python 3.x, pip, make, docker
 
-- Install deps: (using makefile)
+- Step1: Install deps: (using makefile)
 
 ```bash
 make venv
@@ -28,17 +28,39 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Run the app**
+- Step2: Run DB Container
+  
+  Your db root user password need to be set here while creating db.
+
+```bash 
+make create_db root_password=<root password> DB_URL=<Db Url>
+```
+No need to mention DB URL if DB continer is running locally.
+
+This will automatically create a db docker container and initiate db migrations and will create a student table in db.
+
+
+- Step3: Run the container for application
+```bash
+make create_app root_password=<root password> DB_URL=<Db Url>
+```
+In case we are running the both DB container and app container locally then, 
+pass `DB_URL=host.docker.internal`
+
+
+**Run the app locally**
 
 Use the makefile (preferred):
 
 ```bash
-make run
+make run root_password=<root password> DB_URL=<DB URL>
 ```
 
 This goal will automaticaly run the following comands in bash.
 
 ```bash
+export root_password=${root_password}
+export DB_URL=${DB_URL}
 export FLASK_APP=application.py
 export FLASK_ENV=development  # optional
 flask run
@@ -81,11 +103,12 @@ Usage:
 
 Using Make test goal.
 ```bash
-make test
+make test root_password=<your db root password> DB_URL=<DB URL*>
 ```
 
 The goal will run below commands in terminal.
 ```bash
+export root_password={root_password}
 export FLASK_APP=application.py
 export FLASK_ENV=development  # optional
 pytest -v
@@ -94,7 +117,6 @@ pytest -v
 
 **Database**
 
-- SQLite file: `students.db` (created in project root).
 - Create tables manually: (used only for the first to create student table)
 
 ```bash
@@ -114,6 +136,7 @@ and add students in the DB.
 
 ```bash
 source .venv/bin/activate
+export root_password=<root password>
 python add_student.py "Alice" 2000-01-01
 ```
 
@@ -130,20 +153,25 @@ For production or evolving schemas Flask-Migrate (Alembic) is used instead of de
 
 To upgrade the schema run below comands on shell.
 ```bash
-make db_upgrade
+make db_upgrade root_password=<root_password> DB_URL=<DB URL>
 ```
-This will run below commands for you. 
+This will run below commands for you. No need to pass DB_URL if DB is running locally
+
 ```bash
+export root_password=${root_password}
+export DB_URL=${Db_URL}
 flask db migrate
 flask db upgrade
 ```
 
 To downgrade the schema run below comands on shell.
 ```bash
-make db_downgrade
+make db_downgrade root_password=<root_password> DB_URL=<DB URL>
 ```
-This will run below commands for you. 
+This will run below commands for you. No need to pass DB_URL if DB is running locally
 ```bash
+export root_password=${root_password}
+export DB_URL=${Db_URL}
 flask db migrate
 flask db downgrade
 ```

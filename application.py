@@ -4,8 +4,14 @@ from flask_migrate import Migrate
 import datetime
 import sqlite3
 from sqlalchemy import UniqueConstraint, exc
+import pymysql
+import os
+
+pymysql.install_as_MySQLdb()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+root_password = os.getenv('root_password')
+DB_URL= os.getenv('DB_URL', '127.0.0.1')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{root_password}@{DB_URL}:3306/students'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
